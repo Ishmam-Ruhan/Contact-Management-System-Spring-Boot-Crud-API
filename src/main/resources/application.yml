@@ -9,9 +9,9 @@ spring:
 
 #Application Database Setup
   datasource:
-    url: jdbc:postgresql://172.17.0.2:5432/disl_assignment_one
-    username: postgres
-    password: root
+    url: jdbc:postgresql://ec2-3-231-82-226.compute-1.amazonaws.com:5432/d1gs192s2oflnj
+    username: hxlehekcwxtgqe
+    password: f3b4a78b9a073f137b069027586e4c390a264ffef98dd4bdf9d00aa3c96435f0
   jpa:
     properties:
       hibernate:

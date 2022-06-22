@@ -10,8 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -31,7 +31,7 @@ public class Contact{
     private String email;
 
     @NotNull(message = "Firstname field cannot be null!")
-    @Min(value = 2, message = "Minimum firstname length is 2.")
+    @Size(min = 2, message = "Minimum firstname length is 2.")
     private String firstName;
 
     private String lastName;

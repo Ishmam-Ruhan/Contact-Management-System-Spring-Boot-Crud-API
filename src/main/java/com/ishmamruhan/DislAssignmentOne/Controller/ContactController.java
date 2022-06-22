@@ -140,12 +140,14 @@ public class ContactController {
     @DeleteAPI("/delete")
     public ResponseEntity<Response> deleteContact(@RequestParam Long id){
 
+        Long paramValue= id == null ? -1 : id;
+
         return ResponseEntity.status(HttpStatus.OK).body(
                 new Response<>(
                         HttpStatus.OK,
                         true,
                         "Contact Deleted successfully!",
-                        contactService.deleteContact(id)
+                        contactService.deleteContact(paramValue)
                 )
         );
     }

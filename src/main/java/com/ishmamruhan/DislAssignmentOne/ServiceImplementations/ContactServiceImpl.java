@@ -130,45 +130,5 @@ public class ContactServiceImpl implements ContactService {
     }
 
 
-    private String queryBuilder(Map<String, Object> params){
-
-        StringBuilder queryParam = new StringBuilder("");
-
-        boolean isFirstParam = true;
-
-        for(String key: params.keySet()){
-
-            if(!isFirstParam){
-                queryParam.append(" AND ");
-            }
-            if(isFirstParam)isFirstParam=false;
-
-            if(key.equals("contactId")){
-                queryParam.append("c."+key+" = "+params.get(key));
-                continue;
-            }
-
-            if(key.equals("firstName") || key.equals("lastName") || key.equals("email")){
-                queryParam.append("c."+key+" LIKE "+"%"+params.get(key)+"%");
-                continue;
-            }
-
-            if(key.equals("birthDateStart") && params.get("birthDateEnd") != null){
-                queryParam.append("c.birthDate BETWEEN "+params.get("birthDateStart")+" AND "+params.get("birthDateEnd"));
-                continue;
-            }
-            else if(key.equals("birthDateStart") && params.get("birthDateEnd") == null){
-                queryParam.append("c.birthDate = "+params.get("birthDateStart"));
-                continue;
-            }
-            else if(key.equals("birthDateEnd") && params.get("birthDateStart") == null){
-                queryParam.append("c.birthDate = "+params.get("birthDateEnd"));
-                continue;
-            }
-        }
-
-        return params.size() > 1 ? queryParam.substring(4) : queryParam.toString();
-    }
-
 
 }

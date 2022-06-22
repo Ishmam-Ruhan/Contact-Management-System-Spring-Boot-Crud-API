@@ -69,9 +69,6 @@ public class Address {
         this.updatedAt = updatedAt;
     }
 
-    public long getAddressId() {
-        return id;
-    }
 
     public Long getId() {
         return id;

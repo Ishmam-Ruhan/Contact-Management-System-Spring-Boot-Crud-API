@@ -111,11 +111,11 @@ public class Contact{
         this.setAge(calculateAge(this.getBirthDate()));
     }
 
-    public Long getContactId() {
+    public Long getId() {
         return id;
     }
 
-    public void setContactId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -17,8 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -91,16 +89,13 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public Contact updateContact(Contact contact) throws CustomException {
 
-        Contact ourContact = getContactById(contact.getContactId());
+        Contact ourContact = getContactById(contact.getId());
 
         Contact updatedContact = new Contact();
 
         BeanUtils.copyProperties(contact, updatedContact);
 
-        updatedContact.setContactId(ourContact.getContactId());
-
-        logger.debug("Updated Contact: "+contact);
-        logger.debug("Modified Contact: "+updatedContact);
+        updatedContact.setId(ourContact.getId());
 
         return addContact(updatedContact);
     }
@@ -111,7 +106,7 @@ public class ContactServiceImpl implements ContactService {
         Contact contact = getContactById(id);
 
         try{
-            contactRepo.deleteById(id);
+            contactRepo.deleteById(contact.getId());
         }catch (Exception ex){
             throw new CustomException(HttpStatus.BAD_REQUEST, "Cannot perform this operation right now! Try again later.");
         }
@@ -120,13 +115,10 @@ public class ContactServiceImpl implements ContactService {
     }
 
     private Contact getContactById(long id) throws CustomException{
-        Optional<Contact> contact = contactRepo.findById(id);
 
-        if(contact == null){
-            throw new CustomException(HttpStatus.NOT_FOUND, "No contact found with id: "+id);
-        }
+        Contact contact = contactRepo.findById(id).orElseThrow(()-> new CustomException(HttpStatus.NOT_FOUND, "No contact found with id: "+id));
 
-        return contact.get();
+        return contact;
     }
 
 

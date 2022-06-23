@@ -5,7 +5,6 @@ import com.ishmamruhan.DislAssignmentOne.Dao.ContactRepo;
 import com.ishmamruhan.DislAssignmentOne.Entity.ContactEntity.Contact;
 import com.ishmamruhan.DislAssignmentOne.Entity.ContactEntity.ContactSearchCriteria;
 import com.ishmamruhan.DislAssignmentOne.ExceptionManagement.CustomException;
-import com.ishmamruhan.DislAssignmentOne.Helpers.CsvToContactObjects;
 import com.ishmamruhan.DislAssignmentOne.Service.ContactService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +55,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public List<Contact> contactCSVFileUpload(MultipartFile file) throws CustomException {
-        List<Contact> contacts = CsvToContactObjects.processAndGetContacts(file);
+        List<Contact> contacts = null;
 
         return addMultipleContacts(contacts);
     }

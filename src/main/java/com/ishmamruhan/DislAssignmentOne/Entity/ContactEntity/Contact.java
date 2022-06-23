@@ -1,6 +1,7 @@
 package com.ishmamruhan.DislAssignmentOne.Entity.ContactEntity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import com.ishmamruhan.DislAssignmentOne.Entity.AddressEntity.Address;
@@ -68,6 +69,7 @@ public class Contact{
 
     private String passportNo;
 
+    @JsonIgnore
     private Boolean isBlocked = false;
 
     @CreatedDate

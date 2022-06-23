@@ -1,7 +1,12 @@
 package com.ishmamruhan.DislAssignmentOne.Entity.ContactEntity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ishmamruhan.DislAssignmentOne.Enums.BloodGroupType;
+import com.ishmamruhan.DislAssignmentOne.Enums.ContactAddressType;
+import com.ishmamruhan.DislAssignmentOne.Enums.GenderType;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Date;
 
 public class ContactSearchCriteria {
@@ -23,6 +28,8 @@ public class ContactSearchCriteria {
     private String gender;
 
     private String bloodGroup;
+
+    private String addressType;
 
     private String city;
     private String state;
@@ -114,8 +121,8 @@ public class ContactSearchCriteria {
         return gender;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setGender(GenderType gender) {
+        this.gender = gender == null ? null : gender.toString();
     }
 
     public String getBloodGroup() {
@@ -124,6 +131,14 @@ public class ContactSearchCriteria {
 
     public void setBloodGroup(String bloodGroup) {
         this.bloodGroup = bloodGroup;
+    }
+
+    public String getAddressType() {
+        return addressType;
+    }
+
+    public void setAddressType(ContactAddressType addressType) {
+        this.addressType = addressType == null ? null : addressType.toString();
     }
 
     public String getCity() {

@@ -6,6 +6,9 @@ import com.ishmamruhan.DislAssignmentOne.Annotations.PostAPI;
 import com.ishmamruhan.DislAssignmentOne.Annotations.PutAPI;
 import com.ishmamruhan.DislAssignmentOne.Entity.ContactEntity.Contact;
 import com.ishmamruhan.DislAssignmentOne.Entity.ContactEntity.ContactSearchCriteria;
+import com.ishmamruhan.DislAssignmentOne.Enums.BloodGroupType;
+import com.ishmamruhan.DislAssignmentOne.Enums.ContactAddressType;
+import com.ishmamruhan.DislAssignmentOne.Enums.GenderType;
 import com.ishmamruhan.DislAssignmentOne.Output.Response;
 import com.ishmamruhan.DislAssignmentOne.Service.ContactService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -67,6 +70,7 @@ public class ContactController {
             @RequestParam(required = false) String firstname,
             @RequestParam(required = false) String lastname,
             @RequestParam(required = false) String email,
+            @RequestParam(required = false) ContactAddressType addressType,
             @RequestParam(required = false) String city,
             @RequestParam(required = false) String state,
             @RequestParam(required = false) String zipcode,
@@ -79,7 +83,7 @@ public class ContactController {
             @RequestParam(required = false) String job,
             @RequestParam(required = false) String company,
             @RequestParam(required = false) String maxEducation,
-            @RequestParam(required = false) String gender,
+            @RequestParam(required = false) GenderType gender,
             @RequestParam(required = false) String bloodGroup
     ){
 
@@ -88,6 +92,7 @@ public class ContactController {
         contactSearchCriteria.setFirstname(firstname);
         contactSearchCriteria.setLastname(lastname);
         contactSearchCriteria.setEmail(email);
+        contactSearchCriteria.setAddressType(addressType);
         contactSearchCriteria.setCity(city);
         contactSearchCriteria.setZipcode(zipcode);
         contactSearchCriteria.setState(state);

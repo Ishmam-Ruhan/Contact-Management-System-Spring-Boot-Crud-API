@@ -52,7 +52,7 @@ public class ContactController {
                 new Response<>(
                         HttpStatus.CREATED,
                         true,
-                        "Contact created Success!",
+                        "Contact created Successfully!",
                         contactService.addContact(contact)
                 )
         );
@@ -66,7 +66,7 @@ public class ContactController {
                 new Response<>(
                         HttpStatus.OK,
                         true,
-                        "Contact controller works fine!",
+                        "Fetched all contacts.",
                         contactService.getAllContacts(isBlocked)
                 )
         );
@@ -98,7 +98,7 @@ public class ContactController {
             @RequestParam(required = false) String company,
             @RequestParam(required = false) String maxEducation,
             @RequestParam(required = false) GenderType gender,
-            @RequestParam(required = false) Boolean isBlocked,
+            @RequestParam(required = false) Boolean blocked,
             @RequestParam(required = false) String bloodGroup
     ){
 
@@ -122,14 +122,14 @@ public class ContactController {
         contactSearchCriteria.setHighestEducation(maxEducation);
         contactSearchCriteria.setGender(gender);
         contactSearchCriteria.setBloodGroup(bloodGroup);
-        contactSearchCriteria.setBlocked(isBlocked);
+        contactSearchCriteria.setBlocked(blocked);
 
 
         return ResponseEntity.status(HttpStatus.OK).body(
                 new Response<Object>(
                         HttpStatus.OK,
                         true,
-                        "Successfully fetched all data!",
+                        "Search complete!",
                         contactService.findContacts(contactSearchCriteria)
                 )
         );

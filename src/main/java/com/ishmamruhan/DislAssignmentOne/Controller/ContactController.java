@@ -60,14 +60,14 @@ public class ContactController {
 
     @Operation(summary = "Fetch All Contacts!")
     @GetAPI("/all-contacts")
-    public ResponseEntity<Response> getAllContacts(){
+    public ResponseEntity<Response> getAllContacts(@RequestParam(required = false) Boolean isBlocked){
 
         return ResponseEntity.status(HttpStatus.OK).body(
                 new Response<>(
                         HttpStatus.OK,
                         true,
                         "Contact controller works fine!",
-                        contactService.getAllContacts()
+                        contactService.getAllContacts(isBlocked)
                 )
         );
     }

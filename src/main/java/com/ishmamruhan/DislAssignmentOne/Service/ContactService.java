@@ -18,7 +18,7 @@ public interface ContactService {
 
     List<Contact> contactCSVFileUpload(MultipartFile file) throws CustomException;
 
-    List<Contact> getAllContacts();
+    List<Contact> getAllContacts(Boolean isBlocked);
 
     List<Contact> findContacts(ContactSearchCriteria contactSearchCriteria) throws CustomException;
 

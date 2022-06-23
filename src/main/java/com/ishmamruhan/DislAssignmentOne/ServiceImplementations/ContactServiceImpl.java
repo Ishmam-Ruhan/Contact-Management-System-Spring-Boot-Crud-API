@@ -62,8 +62,16 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contact> getAllContacts() {
-        return contactRepo.findAll();
+    public List<Contact> getAllContacts(Boolean blockStatus) {
+
+        List<Contact> allContacts = contactRepo.findAll();
+
+        if(blockStatus == null) return allContacts;
+
+        return allContacts
+                .stream()
+                .filter(contact -> contact.isBlocked() == blockStatus)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -110,11 +109,12 @@ public class ContactServiceImpl implements ContactService {
         return addContact(updatedContact);
     }
 
+
     @Override
-    public Boolean activityCheck(Long id) throws CustomException {
+    public Boolean blockCheck(Long id) throws CustomException {
         Contact contact = getContactById(id);
 
-        return contact.isActive();
+        return contact.isBlocked();
     }
 
     @Override
@@ -130,6 +130,29 @@ public class ContactServiceImpl implements ContactService {
 
         return null;
     }
+
+    @Override
+    public String blockContact(Long id) throws CustomException {
+        Contact contact = getContactById(id);
+
+        contact.setBlocked(true);
+
+        addContact(contact);
+
+        return "Contact Blocked Success!";
+    }
+
+    @Override
+    public String removeBlockedContact(Long id) throws CustomException {
+        Contact contact = getContactById(id);
+
+        contact.setBlocked(false);
+
+        addContact(contact);
+
+        return "Contact Unblocked Success!";
+    }
+
 
     private Contact getContactById(long id) throws CustomException{
 

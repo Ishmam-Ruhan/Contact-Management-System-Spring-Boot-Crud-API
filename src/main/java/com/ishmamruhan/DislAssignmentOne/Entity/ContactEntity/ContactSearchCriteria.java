@@ -31,7 +31,7 @@ public class ContactSearchCriteria {
 
     private String bloodGroup;
 
-    private Boolean isActive;
+    private Boolean isBlocked;
 
     private String addressType;
 
@@ -216,11 +216,11 @@ public class ContactSearchCriteria {
         this.endBirthDate = endBirthDate;
     }
 
-    public Boolean getActive() {
-        return isActive;
+    public Boolean getBlocked() {
+        return isBlocked;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setBlocked(Boolean blocked) {
+        isBlocked = blocked;
     }
 }

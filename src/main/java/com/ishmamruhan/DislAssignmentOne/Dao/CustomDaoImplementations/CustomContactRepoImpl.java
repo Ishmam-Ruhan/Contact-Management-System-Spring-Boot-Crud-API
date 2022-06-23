@@ -130,9 +130,9 @@ public class CustomContactRepoImpl implements CustomContactRepo {
             );
         }
 
-        if(Objects.nonNull(contactSearchCriteria.getActive())){
+        if(Objects.nonNull(contactSearchCriteria.getBlocked())){
             predicateList.add(
-                    criteriaBuilder.equal(criteriaRoot.get("isActive"), contactSearchCriteria.getActive())
+                    criteriaBuilder.equal(criteriaRoot.get("isBlocked"), contactSearchCriteria.getBlocked())
             );
         }
 

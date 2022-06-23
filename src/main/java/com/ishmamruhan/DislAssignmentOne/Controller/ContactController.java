@@ -98,7 +98,7 @@ public class ContactController {
             @RequestParam(required = false) String company,
             @RequestParam(required = false) String maxEducation,
             @RequestParam(required = false) GenderType gender,
-            @RequestParam(required = false) Boolean isActive,
+            @RequestParam(required = false) Boolean isBlocked,
             @RequestParam(required = false) String bloodGroup
     ){
 
@@ -122,7 +122,7 @@ public class ContactController {
         contactSearchCriteria.setHighestEducation(maxEducation);
         contactSearchCriteria.setGender(gender);
         contactSearchCriteria.setBloodGroup(bloodGroup);
-        contactSearchCriteria.setActive(isActive);
+        contactSearchCriteria.setBlocked(isBlocked);
 
 
         return ResponseEntity.status(HttpStatus.OK).body(
@@ -147,7 +147,7 @@ public class ContactController {
                         HttpStatus.OK,
                         true,
                         "Query Success!",
-                        contactService.activityCheck(id)
+                        contactService.blockCheck(id)
                 )
         );
     }
@@ -183,6 +183,41 @@ public class ContactController {
                         true,
                         "Contact Deleted successfully!",
                         contactService.deleteContact(contactId)
+                )
+        );
+    }
+
+
+    @Operation(
+            summary = "Block Contact",
+            description = "Simple pass a contact id to Block the contact!"
+    )
+    @PutAPI("/block-management/block/contact/{contactId}")
+    public ResponseEntity<Response> blockContact(@PathVariable Long contactId){
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new Response<>(
+                        HttpStatus.OK,
+                        true,
+                        "Contact Blocked successfully!",
+                        contactService.blockContact(contactId)
+                )
+        );
+    }
+
+    @Operation(
+            summary = "Remove Blocked Contact",
+            description = "Simple pass a contact id to Unblock the contact!"
+    )
+    @PutAPI("/block-management/unblock/contact/{contactId}")
+    public ResponseEntity<Response> unblockContact(@PathVariable Long contactId){
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new Response<>(
+                        HttpStatus.OK,
+                        true,
+                        "Contact Unblocked successfully!",
+                        contactService.removeBlockedContact(contactId)
                 )
         );
     }

@@ -26,5 +26,9 @@ public interface ContactService {
 
     String deleteContact(Long id) throws CustomException;
 
-    Boolean activityCheck(Long id) throws CustomException;
+    String blockContact(Long id) throws CustomException;
+
+    String removeBlockedContact(Long id) throws CustomException;
+
+    Boolean blockCheck(Long id) throws CustomException;
 }

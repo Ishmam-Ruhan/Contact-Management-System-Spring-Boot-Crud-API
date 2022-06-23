@@ -7,6 +7,7 @@ import com.ishmamruhan.DislAssignmentOne.Entity.AddressEntity.Address;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -67,7 +68,7 @@ public class Contact{
 
     private String passportNo;
 
-    private boolean isActive;
+    private Boolean isBlocked = false;
 
     @CreatedDate
     @Temporal(TemporalType.DATE)
@@ -84,7 +85,7 @@ public class Contact{
     public Contact() {
     }
 
-    public Contact(Long id, String email, String firstName, String lastName, String fullName, List<Address> addressList, Date birthDate, long age, String jobTitle, String company, String highestLevelEducation, String bloodGroup, String gender, String nationalId, String passportNo, boolean isActive, Date createdAT, Date updatedAt) {
+    public Contact(Long id, String email, String firstName, String lastName, String fullName, List<Address> addressList, Date birthDate, long age, String jobTitle, String company, String highestLevelEducation, String bloodGroup, String gender, String nationalId, String passportNo, Boolean isBlocked, Date createdAT, Date updatedAt) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -100,7 +101,7 @@ public class Contact{
         this.gender = gender;
         this.nationalId = nationalId;
         this.passportNo = passportNo;
-        this.isActive = isActive;
+        this.isBlocked = isBlocked;
         this.createdAT = createdAT;
         this.updatedAt = updatedAt;
     }
@@ -231,12 +232,12 @@ public class Contact{
         this.passportNo = passportNo;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public Boolean isBlocked() {
+        return isBlocked;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setBlocked(Boolean blocked) {
+        isBlocked = blocked;
     }
 
     public Date getCreatedAT() {
@@ -272,7 +273,7 @@ public class Contact{
                 ", gender='" + gender + '\'' +
                 ", nationalId='" + nationalId + '\'' +
                 ", passportNo='" + passportNo + '\'' +
-                ", isActive=" + isActive +
+                ", isActive=" + isBlocked +
                 ", createdAT=" + createdAT +
                 ", updatedAt=" + updatedAt +
                 '}';

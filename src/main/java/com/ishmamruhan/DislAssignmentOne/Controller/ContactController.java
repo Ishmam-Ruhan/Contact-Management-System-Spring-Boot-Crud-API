@@ -136,10 +136,10 @@ public class ContactController {
     }
 
     @Operation(
-            summary = "Contact Activity Check",
-            description = "Check whether a contact is active or not."
+            summary = "Contact Block Check",
+            description = "Check whether a contact is blocked or not."
     )
-    @GetAPI("/check/active-status/contact/{id}")
+    @GetAPI("/check/block-status/contact/{id}")
     public ResponseEntity<Response> checkActivityStatus(@PathVariable Long id){
 
         return ResponseEntity.status(HttpStatus.OK).body(
@@ -172,7 +172,7 @@ public class ContactController {
 
     @Operation(
             summary = "Delete Contact",
-            description = "Simple pass a contact id to delete all data!"
+            description = "Pass a contact id to delete the contact and it's all data!"
     )
     @DeleteAPI("/delete-contact/contact/{contactId}")
     public ResponseEntity<Response> deleteContact(@PathVariable Long contactId){
@@ -190,7 +190,7 @@ public class ContactController {
 
     @Operation(
             summary = "Block Contact",
-            description = "Simple pass a contact id to Block the contact!"
+            description = "Pass a contact id to Block the contact!"
     )
     @PutAPI("/block-management/block/contact/{contactId}")
     public ResponseEntity<Response> blockContact(@PathVariable Long contactId){
@@ -206,8 +206,8 @@ public class ContactController {
     }
 
     @Operation(
-            summary = "Remove Blocked Contact",
-            description = "Simple pass a contact id to Unblock the contact!"
+            summary = "Unblock Contact",
+            description = "Pass a contact id to Unblock the contact!"
     )
     @PutAPI("/block-management/unblock/contact/{contactId}")
     public ResponseEntity<Response> unblockContact(@PathVariable Long contactId){

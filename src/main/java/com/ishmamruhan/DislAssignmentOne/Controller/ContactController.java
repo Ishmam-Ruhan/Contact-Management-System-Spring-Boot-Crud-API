@@ -6,7 +6,6 @@ import com.ishmamruhan.DislAssignmentOne.Annotations.PostAPI;
 import com.ishmamruhan.DislAssignmentOne.Annotations.PutAPI;
 import com.ishmamruhan.DislAssignmentOne.Entity.ContactEntity.Contact;
 import com.ishmamruhan.DislAssignmentOne.Entity.ContactEntity.ContactSearchCriteria;
-import com.ishmamruhan.DislAssignmentOne.Enums.BloodGroupType;
 import com.ishmamruhan.DislAssignmentOne.Enums.ContactAddressType;
 import com.ishmamruhan.DislAssignmentOne.Enums.GenderType;
 import com.ishmamruhan.DislAssignmentOne.Output.Response;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("/contact")
 public class ContactController {
 
     @Autowired

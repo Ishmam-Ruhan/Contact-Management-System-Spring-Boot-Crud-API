@@ -1,6 +1,9 @@
 #Application Server Port
 server:
   port: 8089
+  # Base Path of our Application
+  servlet:
+    context-path: /api/v1
 
 #Application Server Name
 spring:

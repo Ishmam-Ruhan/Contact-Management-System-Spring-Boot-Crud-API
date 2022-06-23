@@ -31,6 +31,8 @@ public class ContactSearchCriteria {
 
     private String bloodGroup;
 
+    private Boolean isActive;
+
     private String addressType;
 
     private String city;
@@ -212,5 +214,13 @@ public class ContactSearchCriteria {
 
     public void setEndBirthDate(String endBirthDate) {
         this.endBirthDate = endBirthDate;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }

@@ -130,6 +130,12 @@ public class CustomContactRepoImpl implements CustomContactRepo {
             );
         }
 
+        if(Objects.nonNull(contactSearchCriteria.getActive())){
+            predicateList.add(
+                    criteriaBuilder.equal(criteriaRoot.get("isActive"), contactSearchCriteria.getActive())
+            );
+        }
+
         if(Objects.nonNull(contactSearchCriteria.getCity())){
             predicateList.add(
                     criteriaBuilder.like(

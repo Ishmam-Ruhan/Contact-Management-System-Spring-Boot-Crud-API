@@ -98,6 +98,7 @@ public class ContactController {
             @RequestParam(required = false) String company,
             @RequestParam(required = false) String maxEducation,
             @RequestParam(required = false) GenderType gender,
+            @RequestParam(required = false) Boolean isActive,
             @RequestParam(required = false) String bloodGroup
     ){
 
@@ -121,6 +122,7 @@ public class ContactController {
         contactSearchCriteria.setHighestEducation(maxEducation);
         contactSearchCriteria.setGender(gender);
         contactSearchCriteria.setBloodGroup(bloodGroup);
+        contactSearchCriteria.setActive(isActive);
 
 
         return ResponseEntity.status(HttpStatus.OK).body(
@@ -133,7 +135,10 @@ public class ContactController {
         );
     }
 
-    @Operation(summary = "Contact Activity Check")
+    @Operation(
+            summary = "Contact Activity Check",
+            description = "Check whether a contact is active or not."
+    )
     @GetAPI("/check/active-status/contact/{id}")
     public ResponseEntity<Response> checkActivityStatus(@PathVariable Long id){
 

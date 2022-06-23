@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,7 +63,16 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
+    public List<Contact> getAllContacts() {
+        return contactRepo.findAll();
+    }
+
+    @Override
     public List<Contact> findContacts(ContactSearchCriteria contactSearchCriteria) throws CustomException {
+
+        if(contactSearchCriteria.isAllFieldNull()){
+            throw new CustomException(HttpStatus.BAD_REQUEST, "Please enter minimum one search criteria!");
+        }
 
         List<Contact> contacts = contactRepo.getContactByCustomQuery(contactSearchCriteria);
 
@@ -101,7 +111,14 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public String deleteContact(long id) throws CustomException {
+    public Boolean activityCheck(Long id) throws CustomException {
+        Contact contact = getContactById(id);
+
+        return contact.isActive();
+    }
+
+    @Override
+    public String deleteContact(Long id) throws CustomException {
 
         Contact contact = getContactById(id);
 

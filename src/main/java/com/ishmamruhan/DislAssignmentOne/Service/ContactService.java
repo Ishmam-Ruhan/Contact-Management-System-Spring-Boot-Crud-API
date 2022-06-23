@@ -18,10 +18,13 @@ public interface ContactService {
 
     List<Contact> contactCSVFileUpload(MultipartFile file) throws CustomException;
 
+    List<Contact> getAllContacts();
+
     List<Contact> findContacts(ContactSearchCriteria contactSearchCriteria) throws CustomException;
 
     Contact updateContact(Contact contact) throws CustomException;
 
-    String deleteContact(long id) throws CustomException;
+    String deleteContact(Long id) throws CustomException;
 
+    Boolean activityCheck(Long id) throws CustomException;
 }

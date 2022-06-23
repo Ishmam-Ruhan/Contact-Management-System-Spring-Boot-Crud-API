@@ -7,7 +7,9 @@ import com.ishmamruhan.DislAssignmentOne.Enums.GenderType;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.Objects;
 
 public class ContactSearchCriteria {
     private Long id;
@@ -44,6 +46,21 @@ public class ContactSearchCriteria {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private String endBirthDate;
+
+    public boolean isAllFieldNull() {
+        Field[] fields = this.getClass().getDeclaredFields();
+
+        for(Field field : fields){
+            try {
+                if(field.get(this) != null){
+                    return false;
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return true;
+    }
 
     public Long getId() {
         return id;

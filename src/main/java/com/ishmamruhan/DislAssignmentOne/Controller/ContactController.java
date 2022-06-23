@@ -4,6 +4,7 @@ import com.ishmamruhan.DislAssignmentOne.Annotations.DeleteAPI;
 import com.ishmamruhan.DislAssignmentOne.Annotations.GetAPI;
 import com.ishmamruhan.DislAssignmentOne.Annotations.PostAPI;
 import com.ishmamruhan.DislAssignmentOne.Annotations.PutAPI;
+import com.ishmamruhan.DislAssignmentOne.Configurations.Master.VersionManagement;
 import com.ishmamruhan.DislAssignmentOne.Entity.ContactEntity.Contact;
 import com.ishmamruhan.DislAssignmentOne.Entity.ContactEntity.ContactSearchCriteria;
 import com.ishmamruhan.DislAssignmentOne.Enums.ContactAddressType;
@@ -15,11 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/contact")
+@RequestMapping(VersionManagement.API_BASE_PATH+"/contact-management")
 public class ContactController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class ContactController {
 
 
     @Operation(summary = "Welcome Message and check controller!")
-    @GetAPI("/welcome")
+    @GetAPI("/welcome-message")
     public ResponseEntity<Response> wecomeMessage(){
 
         return ResponseEntity.status(HttpStatus.OK).body(
@@ -58,12 +58,27 @@ public class ContactController {
         );
     }
 
+    @Operation(summary = "Fetch All Contacts!")
+    @GetAPI("/all-contacts")
+    public ResponseEntity<Response> getAllContacts(){
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new Response<>(
+                        HttpStatus.OK,
+                        true,
+                        "Contact controller works fine!",
+                        contactService.getAllContacts()
+                )
+        );
+    }
+
+
     @Operation(
-            summary = "Fetch/Search Contact",
-            description = "All Params are optional. By default, you'll get all contacts.\n" +
+            summary = "Search Contact by Criteria",
+            description = "At least one param should pass!\n" +
                     "\n** Date format: dd-MM-yyyy **"
     )
-    @GetAPI("/get")
+    @GetAPI("/search-contact/contacts/details")
     public ResponseEntity<Response<Object>> findContacts(
             @RequestParam(required = false) Long id,
             @RequestParam(required = false) String firstname,
@@ -118,13 +133,26 @@ public class ContactController {
         );
     }
 
+    @Operation(summary = "Contact Activity Check")
+    @GetAPI("/check/active-status/contact/{id}")
+    public ResponseEntity<Response> checkActivityStatus(@PathVariable Long id){
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new Response<>(
+                        HttpStatus.OK,
+                        true,
+                        "Query Success!",
+                        contactService.activityCheck(id)
+                )
+        );
+    }
 
     @Operation(
             summary = "Update Contact",
             description = "Single Contact **Update** API. Mandatory Fields: \"Id, Email, Firstname, Birthdate, Job Title, Company, Gender\"\n" +
                     "\n ** Date Format:  dd-MM-yyyy **"
     )
-    @PutAPI("/update")
+    @PutAPI("/update-contact")
     public ResponseEntity<Response> updateContact(@Valid @RequestBody Contact contact){
 
         return ResponseEntity.status(HttpStatus.OK).body(
@@ -141,15 +169,15 @@ public class ContactController {
             summary = "Delete Contact",
             description = "Simple pass a contact id to delete all data!"
     )
-    @DeleteAPI("/delete")
-    public ResponseEntity<Response> deleteContact(@RequestParam Long id){
+    @DeleteAPI("/delete-contact/contact/{contactId}")
+    public ResponseEntity<Response> deleteContact(@PathVariable Long contactId){
 
         return ResponseEntity.status(HttpStatus.OK).body(
                 new Response<>(
                         HttpStatus.OK,
                         true,
                         "Contact Deleted successfully!",
-                        contactService.deleteContact(id)
+                        contactService.deleteContact(contactId)
                 )
         );
     }
